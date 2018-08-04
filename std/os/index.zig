@@ -2521,7 +2521,7 @@ pub const Thread = struct {
     pub const Id = if (use_pthreads)
         c.pthread_t
     else switch (builtin.os) {
-        builtin.Os.linux => i32},
+        builtin.Os.linux => i32,
         builtin.Os.windows => windows.HANDLE,
         else => @compileError("Unsupported OS"),
     };
