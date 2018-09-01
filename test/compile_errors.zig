@@ -123,6 +123,17 @@ pub fn addCases(cases: *tests.CompileErrorContext) void {
     );
 
     cases.add(
+        "typo suggestion on function names",
+        \\fn helloworld() void {}
+        \\export fn a() void {
+        \\    hellowold();
+        \\}
+    ,
+        ".tmp_source.zig:3:5: error: use of undeclared identifier 'hellowold'; did you mean 'helloworld'",
+        ".tmp_source.zig:1:1: note: 'helloworld' declared here"
+    );
+
+    cases.add(
         "switch with invalid expression parameter",
         \\export fn entry() void {
         \\    Test(i32);
